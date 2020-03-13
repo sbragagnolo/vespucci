@@ -8,9 +8,10 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-VSAbstractLayout >> createMorphFor: aTree [
+VSAbstractLayout >> createMorphFor: aTree extent: anExtent [
 	| container |
 	container := Morph new.
+	container extent: anExtent.
 	container color: Color transparent.
 	container addMorph: (aTree createMorphWithLayout: self ).
 	^ container

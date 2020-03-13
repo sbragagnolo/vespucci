@@ -16,9 +16,9 @@ VSRelativePositionLayout >> colorFor: aVSNode [
 ]
 
 { #category : #'as yet unclassified' }
-VSRelativePositionLayout >> createMorphFor: aTree [
+VSRelativePositionLayout >> createMorphFor: aTree extent: anExtent [
 	| container |
-	container := super createMorphFor: aTree .
+	container := super createMorphFor: aTree extent: anExtent.
 	aTree acceptBlock: [ : n |
 		 | connecting |
 		 n parent ifNotNil:[
