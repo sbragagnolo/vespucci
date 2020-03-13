@@ -12,11 +12,19 @@ Class {
 }
 
 { #category : #'instance creation' }
-VSBoundingBox class >> zero [
+VSBoundingBox class >> origin: from corner: to [
+	| origin corner |
+	origin := (from x min: to x) @ (from y min: to y).
+	corner := (from x max: to x) @ (from y max: to y).
 	^ self new
-		origin: 0 @ 0;
-		corner: 0 @ 0;
+		origin: origin;
+		corner: corner;
 		yourself
+]
+
+{ #category : #'instance creation' }
+VSBoundingBox class >> zero [
+	^ self origin: 0 @ 0 corner: 0 @ 0
 ]
 
 { #category : #'as yet unclassified' }
@@ -24,6 +32,11 @@ VSBoundingBox >> area [
 	| w |
 	(w := self width) <= 0 ifTrue: [ ^ 0 ].
 	^ w * self height max: 0
+]
+
+{ #category : #'as yet unclassified' }
+VSBoundingBox >> boundingBoxFor: aSubLayout [  
+	^ self
 ]
 
 { #category : #'as yet unclassified' }
@@ -77,6 +90,12 @@ VSBoundingBox >> origin [
 { #category : #'as yet unclassified' }
 VSBoundingBox >> origin: aPoint [ 
 	origin := aPoint
+]
+
+{ #category : #'as yet unclassified' }
+VSBoundingBox >> overlapsOnXWith: anOtherBox [
+	^ (anOtherBox origin x between: origin x and: corner x)
+		or: [ anOtherBox corner x between: origin x and: corner x ]
 ]
 
 { #category : #'as yet unclassified' }

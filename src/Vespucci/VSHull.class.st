@@ -13,12 +13,7 @@ Class {
 
 { #category : #'instance creation' }
 VSHull class >> id: anId origin: from corner: to [
-	| origin corner |
-	origin := (from x min: to x) @ (from y min: to y).
-	corner := (from x max: to x) @ (from y max: to y).
-	^ self new
-		origin: origin;
-		corner: corner;
+	^ (self origin: from corner: to)
 		id: anId;
 		yourself
 ]

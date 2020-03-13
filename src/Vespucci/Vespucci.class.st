@@ -42,16 +42,42 @@ Vespucci class >> createAbsoluteLayoutRepresentationForJsonStream: aStream [
 
 { #category : #'as yet unclassified' }
 Vespucci class >> createBoxedLayoutRepresentationForJsonStream: aStream [
-	| tree hulls current |
+	| tree hulls current clusters |
 	hulls := VSLoadHullsFromJson execute: aStream.
 	tree := VSFromHullToNode execute: hulls.
 	current := VSBoxHorizontalLayout new. 
+	current addContentHolder: (VSBoxPositionPlaceHolder new id: tree id; yourself).
+	clusters := OrderedCollection new. 
 	
+	tree isLeaf ifFalse:[ 
+		| workingWith | 
+		workingWith := hulls select: [ : h | tree children contains: [ : n | n id = h id ] ].
+		workingWith do:[ : h | 
+			| cluster |
+			cluster := clusters detect: [  : c | 
+				c anySatisfy: [ : sample |  sample overlapsOnXWith: h ].	
+			] ifNone: [ 
+				cluster := OrderedCollection new . 
+				clusters add: cluster. 
+				cluster
+			 ].
+		
+			cluster add: h.
+		]
+
+	 ] .
+	clusters do: [ : c | 
+		| lay |
+		
+		lay := current newChild.
+		c do: [ : h | lay addContentHolder:(VSBoxPositionPlaceHolder new id: h id; yourself).  ]
+		
+		  ].
+	
+	^ current
 	
 
-	^ VSRelativePositionLayout new
-		dispositions: (VSRelativeDispositionFromStream execute: aStream);
-		yourself
+	
 ]
 
 { #category : #'as yet unclassified' }

@@ -2,7 +2,9 @@ Class {
 	#name : #VSBoxComposedLayout,
 	#superclass : #VSAbstractLayout,
 	#instVars : [
-		'children'
+		'parent',
+		'children',
+		'content'
 	],
 	#category : #Vespucci
 }
@@ -13,16 +15,89 @@ VSBoxComposedLayout >> adaptNode: aNode [
 ]
 
 { #category : #initialization }
+VSBoxComposedLayout >> addContentHolder: aBoxPositionHolder [
+	content add: aBoxPositionHolder 
+]
+
+{ #category : #'as yet unclassified' }
+VSBoxComposedLayout >> boundingBox [
+	^ self parent boundingBoxFor: self
+]
+
+{ #category : #'as yet unclassified' }
+VSBoxComposedLayout >> boundingBoxFor: aVSBoxVerticalLayout [ 
+	self subclassResponsibility 
+]
+
+{ #category : #initialization }
+VSBoxComposedLayout >> createMorphFor: aTree extent: anExtent [
+	|  morph |
+	^ parent ifNil: [ 
+		parent := VSBoundingBox origin: 0 @ 0 corner: anExtent..
+		morph := super createMorphFor: aTree extent: anExtent.
+		parent := nil.
+		 morph 
+	] ifNotNil: [ 
+	 	super createMorphFor: aTree extent: anExtent.
+	]
+]
+
+{ #category : #'as yet unclassified' }
+VSBoxComposedLayout >> extent: aVSNode [ 
+	^ (self layoutFor: aVSNode) calculateExtentFor: aVSNode
+]
+
+{ #category : #initialization }
+VSBoxComposedLayout >> initialize [ 
+	super initialize. 
+	content := OrderedCollection new.
+	children := OrderedCollection new.
+]
+
+{ #category : #'as yet unclassified' }
+VSBoxComposedLayout >> layoutFor: aVSNode [
+	| all | 
+	all :=  (self possibleLayoutsFor: aVSNode) reject: [ : i | i isNil ].
+	all size = 1 ifTrue: [ ^ all first  ].
+	self error: ' Nor layout, or many layouts matching the node '. 
+
+]
+
+{ #category : #initialization }
 VSBoxComposedLayout >> newChild [
 	self subclassResponsibility 
 ]
 
 { #category : #initialization }
 VSBoxComposedLayout >> newHorizontal [
-	^ VSBoxHorizontalLayout new
+	^ VSBoxHorizontalLayout new parent: self ; yourself
 ]
 
 { #category : #initialization }
 VSBoxComposedLayout >> newVertical [
- 	^ VSBoxVerticalLayout new
+ 	^ VSBoxVerticalLayout new parent: self ; yourself
+]
+
+{ #category : #'as yet unclassified' }
+VSBoxComposedLayout >> parent [
+	^ parent
+]
+
+{ #category : #accessing }
+VSBoxComposedLayout >> parent: aVSBoxHorizontalLayout [ 
+	parent := aVSBoxHorizontalLayout
+]
+
+{ #category : #'as yet unclassified' }
+VSBoxComposedLayout >> possibleLayoutsFor: aVSNode [
+	^ (content anySatisfy: [ :c | c itLaysOut: aVSNode ])
+		ifTrue: [ {self} ]
+		ifFalse: [ children
+				ifEmpty: [ { nil } ]
+				ifNotEmpty: [ children collect: [ :c | c layoutFor: aVSNode ] ] ]
+]
+
+{ #category : #'as yet unclassified' }
+VSBoxComposedLayout >> topLeft: aVSNode [
+	^ (self layoutFor: aVSNode) calculateTopLeftFor: aVSNode
 ]
