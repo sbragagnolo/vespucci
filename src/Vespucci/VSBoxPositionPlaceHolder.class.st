@@ -18,6 +18,11 @@ VSBoxPositionPlaceHolder >> initialize [
 	margin := VSBoundingBox zero.
 ]
 
+{ #category : #'as yet unclassified' }
+VSBoxPositionPlaceHolder >> padding [
+	^ padding
+]
+
 { #category : #initialization }
 VSBoxPositionPlaceHolder >> printOn: aStream [
 	aStream nextPutAll: 'Place holder for id: ', id asString

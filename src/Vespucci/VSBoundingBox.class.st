@@ -12,6 +12,16 @@ Class {
 }
 
 { #category : #'instance creation' }
+VSBoundingBox class >> marginOne [
+	^ self origin: 1 @ 1 corner: 1 @ 1
+]
+
+{ #category : #'instance creation' }
+VSBoundingBox class >> marginTen [
+	^ self origin: 10 @ 10 corner: 10 @ 10
+]
+
+{ #category : #'instance creation' }
 VSBoundingBox class >> origin: from corner: to [
 	| origin corner |
 	origin := (from x min: to x) @ (from y min: to y).

@@ -2,6 +2,7 @@ Class {
 	#name : #VSBoxComposedLayout,
 	#superclass : #VSAbstractLayout,
 	#instVars : [
+		'margin',
 		'parent',
 		'children',
 		'content'
@@ -52,6 +53,7 @@ VSBoxComposedLayout >> initialize [
 	super initialize. 
 	content := OrderedCollection new.
 	children := OrderedCollection new.
+	margin := VSBoundingBox marginTen.
 ]
 
 { #category : #'as yet unclassified' }
