@@ -42,42 +42,7 @@ Vespucci class >> createAbsoluteLayoutRepresentationForJsonStream: aStream [
 
 { #category : #'as yet unclassified' }
 Vespucci class >> createBoxedLayoutRepresentationForJsonStream: aStream [
-	| tree hulls current clusters |
-	hulls := VSLoadHullsFromJson execute: aStream.
-	tree := VSFromHullToNode execute: hulls.
-	current := VSBoxHorizontalLayout new. 
-	current addContentHolder: (VSBoxPositionPlaceHolder new id: tree id; yourself).
-	clusters := OrderedCollection new. 
-	
-	tree isLeaf ifFalse:[ 
-		| workingWith | 
-		workingWith := hulls select: [ : h | tree children contains: [ : n | n id = h id ] ].
-		workingWith do:[ : h | 
-			| cluster |
-			cluster := clusters detect: [  : c | 
-				c anySatisfy: [ : sample |  sample overlapsOnXWith: h ].	
-			] ifNone: [ 
-				cluster := OrderedCollection new . 
-				clusters add: cluster. 
-				cluster
-			 ].
-		
-			cluster add: h.
-		]
-
-	 ] .
-	clusters do: [ : c | 
-		| lay |
-		
-		lay := current newChild.
-		c do: [ : h | lay addContentHolder:(VSBoxPositionPlaceHolder new id: h id; yourself).  ]
-		
-		  ].
-	
-	^ current
-	
-
-	
+	^ self new createBoxedLayoutRepresentationForJsonStream: aStream
 ]
 
 { #category : #'as yet unclassified' }
@@ -90,4 +55,60 @@ Vespucci class >> createRelativeLayoutRepresentationForJsonStream: aStream [
 { #category : #'as yet unclassified' }
 Vespucci class >> loadContentionTreeFromJsonStream: aStream [
 	^ VSFromHullToNode execute: (VSLoadHullsFromJson execute: aStream)
+]
+
+{ #category : #'as yet unclassified' }
+Vespucci >> clusterize: tree with: hulls into: current [
+	| clusters |
+	clusters := OrderedCollection new.
+	tree isLeaf
+		ifFalse: [ | workingWith |
+			workingWith := hulls 	select: [ : h | tree children contains: [ :n | n id = h id ] ].
+			workingWith 	do: [ :h | 
+			| cluster |
+			cluster := clusters detect:
+							[ :c | c anySatisfy: [ :sample | sample overlapsOnYWith: h ] ]
+						ifNone: [ cluster := OrderedCollection new.
+							clusters add: cluster.
+							cluster ].
+					cluster add: h ] ].
+	clusters
+		do: [ : cluster | 
+			| lay  subtree |
+			lay := current newChild.
+			cluster
+				do: [ :h | 
+					subtree := tree children detect: [ : c | c id = h id ].
+					
+					self clusterize: subtree with: hulls  into: lay. 
+					lay
+						addContentHolder:
+							(VSBoxPositionPlaceHolder new
+								id: h id;
+								yourself) ] ]
+						
+					
+				
+			
+		
+	
+
+
+
+
+]
+
+{ #category : #'as yet unclassified' }
+Vespucci >> createBoxedLayoutRepresentationForJsonStream: aStream [
+	| tree hulls current |
+	hulls := (VSLoadHullsFromJson execute: aStream) reverse.
+	tree := VSFromHullToNode execute: hulls.
+	current := VSBoxVerticalLayout new.
+	current
+		addContentHolder:
+			(VSBoxPositionPlaceHolder new
+				id: tree id;
+				yourself).
+	self clusterize: tree with: hulls into: current.
+	^ current
 ]

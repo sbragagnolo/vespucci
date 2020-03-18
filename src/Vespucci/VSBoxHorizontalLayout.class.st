@@ -10,8 +10,9 @@ VSBoxHorizontalLayout >> boundingBoxFor: aVSBoxVerticalLayout [
 	box := self boundingBox.
 	index := (children indexOf: aVSBoxVerticalLayout) - 1.
 	subbox := VSBoundingBox new.
-	subbox origin: (index * (box extent x / children size)) @  box origin y.
-	subbox corner:( ((index+1) * (box extent x / children size)) -1 ) @  box corner y.
+	
+	subbox origin:  (box origin x + (index * (box extent x / children size))  ) @  (box origin y).
+	subbox corner:( ((index+1) * (box extent x / children size)) ) @  (box corner y  ).
 	^ subbox 
 ]
 
@@ -19,7 +20,7 @@ VSBoxHorizontalLayout >> boundingBoxFor: aVSBoxVerticalLayout [
 VSBoxHorizontalLayout >> calculateExtentFor: aVSNode [
 	| extent |
 	extent := self boundingBox extent.
-	^ (extent x / content size) @ extent y
+	^ ((extent x / content size) @ extent y) - 1
 ]
 
 { #category : #'as yet unclassified' }
@@ -28,7 +29,7 @@ VSBoxHorizontalLayout >> calculateTopLeftFor: aVSNode [
 	box := self boundingBox.
 	position := (content detect: [ :c | c itLaysOut: aVSNode  ]).
 	index := (content indexOf: position) - 1.
-	^(index * (box extent x / content size)) @  box origin y 
+	^ (box origin x + (index * (box extent x / content size)) ) @  box origin y 
 	
 ]
 

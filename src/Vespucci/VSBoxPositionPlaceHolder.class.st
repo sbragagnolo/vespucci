@@ -17,3 +17,8 @@ VSBoxPositionPlaceHolder >> initialize [
 	padding := VSBoundingBox zero.
 	margin := VSBoundingBox zero.
 ]
+
+{ #category : #initialization }
+VSBoxPositionPlaceHolder >> printOn: aStream [
+	aStream nextPutAll: 'Place holder for id: ', id asString
+]

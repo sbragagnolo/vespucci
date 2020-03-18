@@ -34,7 +34,7 @@ VSNode >> children [
 { #category : #'as yet unclassified' }
 VSNode >> childrenDo: aBlockClosure [
 	self isLeaf
-		ifFalse: [ children do: [ :a | aBlockClosure value: a ] ]
+		ifFalse: [ children  do: [ :a | aBlockClosure value: a ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -44,7 +44,7 @@ VSNode >> createMorphWithLayout: aLayout [
 		topLeft: (aLayout topLeft: self);
 		extent: (aLayout extent: self);
 		color: (Color black alpha: 0.2).
-	label := (aLayout topLeft: self) asMorph
+	label := ((aLayout topLeft: self) asString, ' ID: ', id asString )asMorph
 		color: Color cyan;
 		topLeft: (aLayout topLeft: self) + (2 @ 5);
 		yourself.

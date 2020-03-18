@@ -99,7 +99,14 @@ VSBoundingBox >> overlapsOnXWith: anOtherBox [
 ]
 
 { #category : #'as yet unclassified' }
+VSBoundingBox >> overlapsOnYWith: anOtherBox [
+	^ (anOtherBox origin y between: origin y and: corner y)
+		or: [ anOtherBox corner y between: origin y and: corner y ]
+]
+
+{ #category : #'as yet unclassified' }
 VSBoundingBox >> printOn: aStream [
+	aStream nextPutAll: 'VBox'.
 	origin printOn: aStream.
 	aStream nextPutAll: '::'.
 	corner printOn: aStream

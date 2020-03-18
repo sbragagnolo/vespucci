@@ -57,7 +57,7 @@ VSBoxComposedLayout >> initialize [
 { #category : #'as yet unclassified' }
 VSBoxComposedLayout >> layoutFor: aVSNode [
 	| all | 
-	all :=  (self possibleLayoutsFor: aVSNode) reject: [ : i | i isNil ].
+	all :=  (self possibleLayoutsFor: aVSNode) .
 	all size = 1 ifTrue: [ ^ all first  ].
 	self error: ' Nor layout, or many layouts matching the node '. 
 
@@ -90,11 +90,11 @@ VSBoxComposedLayout >> parent: aVSBoxHorizontalLayout [
 
 { #category : #'as yet unclassified' }
 VSBoxComposedLayout >> possibleLayoutsFor: aVSNode [
-	^ (content anySatisfy: [ :c | c itLaysOut: aVSNode ])
+	^ ((content anySatisfy: [ :c | c itLaysOut: aVSNode ])
 		ifTrue: [ {self} ]
 		ifFalse: [ children
 				ifEmpty: [ { nil } ]
-				ifNotEmpty: [ children collect: [ :c | c layoutFor: aVSNode ] ] ]
+				ifNotEmpty: [ children flatCollect: [ :c | c possibleLayoutsFor: aVSNode ] ] ]) reject: [ : a | a isNil ]
 ]
 
 { #category : #'as yet unclassified' }
