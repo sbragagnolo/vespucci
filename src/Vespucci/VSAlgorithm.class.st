@@ -12,21 +12,8 @@ Class {
 }
 
 { #category : #running }
-VSAlgorithm class >> compose: anOtherAlgorithm [
-	^ self new compose: anOtherAlgorithm new
-]
-
-{ #category : #running }
 VSAlgorithm class >> execute: aParameter [
 	^ self new execute: aParameter
-]
-
-{ #category : #'as yet unclassified' }
-VSAlgorithm >> compose: anOtherAlgorithm [
-	^ VSCompose new
-		outter: self;
-		inner: anOtherAlgorithm;
-		yourself
 ]
 
 { #category : #running }
