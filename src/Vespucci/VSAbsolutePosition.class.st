@@ -17,16 +17,18 @@ VSAbsolutePosition >> corner: aPoint [
 ]
 
 { #category : #'as yet unclassified' }
+VSAbsolutePosition >> extentFor: aContent [
+	self assert: (self itLaysOut: aContent ).
+	^ corner - origin
+]
+
+{ #category : #'as yet unclassified' }
 VSAbsolutePosition >> origin: aPoint [ 
 	origin := aPoint
 ]
 
 { #category : #'as yet unclassified' }
-VSAbsolutePosition >> privateExtent [
-	^ corner - origin
-]
-
-{ #category : #'as yet unclassified' }
-VSAbsolutePosition >> privateTopLeft [
+VSAbsolutePosition >> topLeftFor: aContent [
+	self assert: (self itLaysOut: aContent ).
 	^ origin
 ]

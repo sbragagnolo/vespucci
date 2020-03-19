@@ -2,13 +2,13 @@
 Calculate Absolute disposition based on relative analyis of the contention tree and the given hulls
 "
 Class {
-	#name : #VSRelativeDispositionFromHullsAndTree,
+	#name : #VSCalculateRelativeLayoutFromHullsAndTree,
 	#superclass : #VSAlgorithm,
 	#category : #Vespucci
 }
 
 { #category : #'as yet unclassified' }
-VSRelativeDispositionFromHullsAndTree >> privateExecute: aTuple [ 
+VSCalculateRelativeLayoutFromHullsAndTree >> privateExecute: aTuple [ 
 	| dispositions hulls tree |
 
 	hulls := aTuple first.
@@ -24,5 +24,5 @@ VSRelativeDispositionFromHullsAndTree >> privateExecute: aTuple [
 		dispo id: n id.
 		dispositions add: dispo 
 	].
-	^ dispositions
+	^VSRelativePositionLayout new dispositions: dispositions; yourself 
 ]

@@ -2,13 +2,13 @@
 It create a contention tree by anaylzing the composition of the given hulls
 "
 Class {
-	#name : #VSFromHullToNode,
+	#name : #VSCreateNodeFromHull,
 	#superclass : #VSAlgorithm,
 	#category : #Vespucci
 }
 
 { #category : #'as yet unclassified' }
-VSFromHullToNode >> bestParent: aCollectionOfSinglePanes for: aPane [
+VSCreateNodeFromHull >> bestParent: aCollectionOfSinglePanes for: aPane [
 	| parents |
 	parents := aCollectionOfSinglePanes select: [ :possibleParent | 
 		possibleParent ~= aPane and: [ possibleParent contains: aPane 
@@ -17,14 +17,14 @@ VSFromHullToNode >> bestParent: aCollectionOfSinglePanes for: aPane [
 ]
 
 { #category : #'as yet unclassified' }
-VSFromHullToNode >> node: nodes for: aHull [
+VSCreateNodeFromHull >> node: nodes for: aHull [
 	^ nodes at: aHull ifAbsentPut: [ 
 		VSNode new id: aHull id; yourself. 
 	]
 ]
 
 { #category : #'as yet unclassified' }
-VSFromHullToNode >> privateExecute: hulls [
+VSCreateNodeFromHull >> privateExecute: hulls [
 	| nodes roots |
 	nodes := Dictionary new.
 	hulls

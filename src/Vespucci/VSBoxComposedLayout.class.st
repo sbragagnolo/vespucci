@@ -56,6 +56,16 @@ VSBoxComposedLayout >> initialize [
 	margin := VSBoundingBox marginTen.
 ]
 
+{ #category : #initialization }
+VSBoxComposedLayout >> isHorizontal [
+	^ false
+]
+
+{ #category : #initialization }
+VSBoxComposedLayout >> isVertical [
+	^ false
+]
+
 { #category : #'as yet unclassified' }
 VSBoxComposedLayout >> layoutFor: aVSNode [
 	| all | 

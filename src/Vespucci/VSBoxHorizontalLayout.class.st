@@ -41,6 +41,11 @@ VSBoxHorizontalLayout >> calculateTopLeftFor: aVSNode [
 ]
 
 { #category : #initialization }
+VSBoxHorizontalLayout >> isHorizontal [
+	^ true
+]
+
+{ #category : #initialization }
 VSBoxHorizontalLayout >> newChild [
 	| child |
 	child := self newVertical.
