@@ -4,7 +4,7 @@ Calculate Absolute disposition based on relative analyis of the contention tree 
 Class {
 	#name : #VSCalculateRelativeLayoutFromHullsAndTree,
 	#superclass : #VSAlgorithm,
-	#category : #Vespucci
+	#category : #'Vespucci-Algorithm'
 }
 
 { #category : #'as yet unclassified' }

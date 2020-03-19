@@ -6,7 +6,7 @@ We may need to changethis if the VSHulls are relative.
 Class {
 	#name : #VSRelativePositionLayout,
 	#superclass : #VSAbsoluteLayout,
-	#category : #Vespucci
+	#category : #'Vespucci-Layout'
 }
 
 { #category : #'as yet unclassified' }

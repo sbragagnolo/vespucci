@@ -4,7 +4,7 @@ Create Absolute Positioning objects by analyzing hulls
 Class {
 	#name : #VSCalculateAbsoluteLayoutFromHullsAndTree,
 	#superclass : #VSAlgorithm,
-	#category : #Vespucci
+	#category : #'Vespucci-Algorithm'
 }
 
 { #category : #running }

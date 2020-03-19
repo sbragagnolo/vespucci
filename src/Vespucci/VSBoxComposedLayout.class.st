@@ -1,3 +1,7 @@
+"
+A box layout is one of the dynamic typical configurations. 
+Each box arrange the items one after the other, from left to right, or top to down, according to the kind
+"
 Class {
 	#name : #VSBoxComposedLayout,
 	#superclass : #VSAbstractLayout,
@@ -7,7 +11,7 @@ Class {
 		'children',
 		'content'
 	],
-	#category : #Vespucci
+	#category : #'Vespucci-Layout'
 }
 
 { #category : #initialization }

@@ -4,7 +4,7 @@ Load hulls from a json created in base of the contours extracted by OpenCV
 Class {
 	#name : #VSLoadHullsFromJSONStream,
 	#superclass : #VSAlgorithm,
-	#category : #Vespucci
+	#category : #'Vespucci-Algorithm'
 }
 
 { #category : #running }

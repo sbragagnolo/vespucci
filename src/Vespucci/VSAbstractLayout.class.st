@@ -4,7 +4,7 @@ The general abstract layout represents the layout. it provides some template met
 Class {
 	#name : #VSAbstractLayout,
 	#superclass : #Object,
-	#category : #Vespucci
+	#category : #'Vespucci-Core'
 }
 
 { #category : #'as yet unclassified' }

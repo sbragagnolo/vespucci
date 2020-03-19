@@ -8,7 +8,7 @@ Class {
 		'origin',
 		'corner'
 	],
-	#category : #Vespucci
+	#category : #'Vespucci-Core'
 }
 
 { #category : #'instance creation' }

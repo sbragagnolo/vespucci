@@ -8,7 +8,7 @@ Class {
 		'origin',
 		'corner'
 	],
-	#category : #Vespucci
+	#category : #'Vespucci-Layout'
 }
 
 { #category : #'as yet unclassified' }

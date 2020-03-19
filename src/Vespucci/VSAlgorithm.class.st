@@ -8,7 +8,7 @@ Class {
 		'lastParameter',
 		'lastValue'
 	],
-	#category : #Vespucci
+	#category : #'Vespucci-Algorithm'
 }
 
 { #category : #running }

@@ -1,7 +1,10 @@
+"
+Horizontal layout is a box lay out that organices the content from left to right
+"
 Class {
 	#name : #VSBoxHorizontalLayout,
 	#superclass : #VSBoxComposedLayout,
-	#category : #Vespucci
+	#category : #'Vespucci-Layout'
 }
 
 { #category : #'as yet unclassified' }

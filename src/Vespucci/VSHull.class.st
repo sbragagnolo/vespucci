@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'id'
 	],
-	#category : #Vespucci
+	#category : #'Vespucci-Core'
 }
 
 { #category : #'instance creation' }

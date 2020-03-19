@@ -11,7 +11,7 @@ Class {
 		'parent',
 		'children'
 	],
-	#category : #Vespucci
+	#category : #'Vespucci-Core'
 }
 
 { #category : #'as yet unclassified' }

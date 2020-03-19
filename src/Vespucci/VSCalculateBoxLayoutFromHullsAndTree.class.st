@@ -4,7 +4,7 @@ Calculates a tipical box (horizontal / vertical layout)
 Class {
 	#name : #VSCalculateBoxLayoutFromHullsAndTree,
 	#superclass : #VSAlgorithm,
-	#category : #Vespucci
+	#category : #'Vespucci-Algorithm'
 }
 
 { #category : #running }

@@ -8,7 +8,7 @@ Class {
 		'padding',
 		'margin'
 	],
-	#category : #Vespucci
+	#category : #'Vespucci-Layout'
 }
 
 { #category : #initialization }

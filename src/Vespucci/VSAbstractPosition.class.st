@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'id'
 	],
-	#category : #Vespucci
+	#category : #'Vespucci-Layout'
 }
 
 { #category : #'as yet unclassified' }

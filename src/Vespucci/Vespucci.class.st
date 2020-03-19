@@ -29,7 +29,7 @@ layoutRelative extent: (tree children select: [: t | t isLeaf not ] ) anyOne chi
 Class {
 	#name : #Vespucci,
 	#superclass : #Object,
-	#category : #Vespucci
+	#category : #'Vespucci-API'
 }
 
 { #category : #'as yet unclassified' }

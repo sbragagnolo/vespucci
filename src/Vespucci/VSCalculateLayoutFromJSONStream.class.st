@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'composedAlgorithm'
 	],
-	#category : #Vespucci
+	#category : #'Vespucci-Algorithm'
 }
 
 { #category : #'as yet unclassified' }

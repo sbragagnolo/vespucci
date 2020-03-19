@@ -4,7 +4,7 @@ It create a contention tree by anaylzing the composition of the given hulls
 Class {
 	#name : #VSCreateNodeFromHull,
 	#superclass : #VSAlgorithm,
-	#category : #Vespucci
+	#category : #'Vespucci-Algorithm'
 }
 
 { #category : #'as yet unclassified' }
