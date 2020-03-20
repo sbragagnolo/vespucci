@@ -6,7 +6,9 @@ Class {
 
 { #category : #testing }
 VSRelativeLayoutComposition >> compare: aUnit with: otherUnit [
-	^ 1 - ((aUnit relativeLayout difference: otherUnit relativeLayout) size / aUnit tree size) 
+	^ (aUnit relativeLayout difference: otherUnit relativeLayout)
+		dispositions size / aUnit relativeLayout dispositions size
+		+ otherUnit relativeLayout dispositions size
 ]
 
 { #category : #testing }

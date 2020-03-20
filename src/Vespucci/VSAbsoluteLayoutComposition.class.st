@@ -6,7 +6,7 @@ Class {
 
 { #category : #testing }
 VSAbsoluteLayoutComposition >> compare: aUnit with: otherUnit [
-	^ 1 - ((aUnit absoluteLayout difference: otherUnit absoluteLayout) size / aUnit tree size) 
+	^ 1 - ((aUnit absoluteLayout difference: otherUnit absoluteLayout) dispositions size / (otherUnit absoluteLayout dispositions size + aUnit absoluteLayout dispositions size)) 
 ]
 
 { #category : #testing }

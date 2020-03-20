@@ -58,10 +58,25 @@ VSNode >> createMorphWithLayout: aLayout [
 	^ thisMorph
 ]
 
+{ #category : #'as yet unclassified' }
+VSNode >> deepCopy [
+	| node |
+	node := self class new.
+	node id: id.
+	self isLeaf ifFalse: [ 
+		self children do: [ :c | node addChild: c deepCopy ].
+	].
+	^ node
+]
+
 { #category : #tree }
 VSNode >> difference: aVSNode [ 
 	|  all  | 
-	aVSNode id = id ifFalse:[ self error: ' Should not be comparing ths '.] .
+	aVSNode id = id ifFalse:[ | diff |
+		diff := VSNode new .
+		diff addChild: self deepCopy.
+		diff addChild: aVSNode.
+		^ diff ] .
 
 	all := OrderedCollection new. 
 	

@@ -43,6 +43,11 @@ VSMetricComparableUnit >> hulls: aCollection [
 ]
 
 { #category : #'as yet unclassified' }
+VSMetricComparableUnit >> image: aFileReference [ 
+	image := aFileReference
+]
+
+{ #category : #'as yet unclassified' }
 VSMetricComparableUnit >> relativeLayout [
 	^ relativeLayout
 ]

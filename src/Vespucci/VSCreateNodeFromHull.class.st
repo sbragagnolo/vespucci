@@ -13,7 +13,9 @@ VSCreateNodeFromHull >> bestParent: aCollectionOfSinglePanes for: aPane [
 	parents := aCollectionOfSinglePanes select: [ :possibleParent | 
 		possibleParent ~= aPane and: [ possibleParent contains: aPane 
 	] ].
-	^ parents ifEmpty: [ nil ] ifNotEmpty: [ parents min ]
+	^ parents ifEmpty: [ 
+		nil
+		] ifNotEmpty: [ parents min ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -30,11 +32,12 @@ VSCreateNodeFromHull >> privateExecute: hulls [
 	hulls
 		do: [ :p | 
 			| parent node bestHull |
+			node := self node: nodes for: p.
 			bestHull := self bestParent: hulls for: p.
-			bestHull
-				ifNotNil: [ parent := self node: nodes for: bestHull.
-					node := self node: nodes for: p.
-					parent addChild: node ] ].
+			bestHull ifNotNil: [ parent := self node: nodes for: bestHull.
+					parent addChild: node 
+				] 
+			].
 	roots := nodes values select: [ :n | n isRoot ].
 	self assert: roots size = 1.
 	^ roots first

@@ -20,7 +20,7 @@ VSAbsoluteLayout >> difference: aVSAbsoluteLayout [
 			inId size = 1
 				ifTrue: [ newDispos add: inId first ]
 				ifFalse: [ inId first = inId second
-						ifFalse: [ newDispos addAll: inId second ] ] ].
+						ifFalse: [ newDispos add: inId second ] ] ].
 	^ newDispos
 		ifEmpty: [ VSEmptyNode instance ]
 		ifNotEmpty: [ self class new
