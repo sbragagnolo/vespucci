@@ -33,6 +33,13 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+Vespucci class >> compareUnitWithItSelf: aStream [
+	| unit |
+	unit := self createComparableUnit: aStream.
+	^ self metricsFor: unit and: unit 
+]
+
+{ #category : #'as yet unclassified' }
 Vespucci class >> createAbsoluteLayoutRepresentationForJsonStream: aStream [
 	^ VSCalculateLayoutFromJSONStream absoluteLayout: aStream
 ]
@@ -43,6 +50,11 @@ Vespucci class >> createBoxedLayoutRepresentationForJsonStream: aStream [
 ]
 
 { #category : #'as yet unclassified' }
+Vespucci class >> createComparableUnit: aStream [
+	^ VSCalculateComparableUnitFromJSONStream execute: aStream
+]
+
+{ #category : #'as yet unclassified' }
 Vespucci class >> createRelativeLayoutRepresentationForJsonStream: aStream [
 	^ VSCalculateLayoutFromJSONStream relativeLayout: aStream
 ]
@@ -50,4 +62,13 @@ Vespucci class >> createRelativeLayoutRepresentationForJsonStream: aStream [
 { #category : #'as yet unclassified' }
 Vespucci class >> loadContentionTreeFromJsonStream: aStream [
 	^ VSCreateNodeFromHull execute: (VSLoadHullsFromJSONStream execute: aStream)
+]
+
+{ #category : #'as yet unclassified' }
+Vespucci class >> metricsFor: aUnit and: anOtherUnit [
+	^ VSMetrics allSubclasses
+		collect: [ :m | 
+			| metric |
+			metric := m new.
+			metric -> (metric compare: aUnit with: anOtherUnit) ]
 ]

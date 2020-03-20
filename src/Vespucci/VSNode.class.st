@@ -31,6 +31,11 @@ VSNode >> children [
 	^ children ifNil: [ children := Set new ]
 ]
 
+{ #category : #adding }
+VSNode >> children: aCollection [ 
+	children := aCollection
+]
+
 { #category : #'as yet unclassified' }
 VSNode >> childrenDo: aBlockClosure [
 	self isLeaf
@@ -51,6 +56,26 @@ VSNode >> createMorphWithLayout: aLayout [
 	thisMorph addMorph: label.
 	self childrenDo: [ :c | thisMorph addMorph:( c createMorphWithLayout: aLayout) ].
 	^ thisMorph
+]
+
+{ #category : #tree }
+VSNode >> difference: aVSNode [ 
+	|  all  | 
+	aVSNode id = id ifFalse:[ self error: ' Should not be comparing ths '.] .
+
+	all := OrderedCollection new. 
+	
+	((self children asOrderedCollection , aVSNode children asOrderedCollection) groupedBy: [ : a | a id ]) valuesDo: [ 
+		: onId | 	
+			onId size = 1 ifTrue: [  
+				all add: onId first  
+			]  ifFalse: [ 
+				|diff| 
+				diff := onId first difference: onId second.
+				diff ifNotNil: [  all add: diff   ].
+			].
+	 ]. 
+	^ all ifEmpty: [ VSEmptyNode instance  ] ifNotEmpty:[ self class new id: id ; children: all ; yourself ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -88,4 +113,11 @@ VSNode >> parent [
 { #category : #'as yet unclassified' }
 VSNode >> parent: aVSNode [ 
 	parent := aVSNode
+]
+
+{ #category : #'as yet unclassified' }
+VSNode >> size [
+	^ self isLeaf
+		ifTrue: [ children inject: 1 into: [ :acc :each | acc + each size ] ]
+		ifFalse: [ 1 ]
 ]

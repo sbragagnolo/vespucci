@@ -11,6 +11,29 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+VSAbsoluteLayout >> difference: aVSAbsoluteLayout [
+	| newDispos |
+	newDispos := OrderedCollection new.
+	(dispositions asOrderedCollection , aVSAbsoluteLayout dispositions
+		groupedBy: [ :a | a id ])
+		valuesDo: [ :inId | 
+			inId size = 1
+				ifTrue: [ newDispos add: inId first ]
+				ifFalse: [ inId first = inId second
+						ifFalse: [ newDispos addAll: inId second ] ] ].
+	^ newDispos
+		ifEmpty: [ VSEmptyNode instance ]
+		ifNotEmpty: [ self class new
+				dispositions: newDispos;
+				yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+VSAbsoluteLayout >> dispositions [
+	^ dispositions
+]
+
+{ #category : #'as yet unclassified' }
 VSAbsoluteLayout >> dispositions: aCollection [ 
 	dispositions := aCollection
 ]
