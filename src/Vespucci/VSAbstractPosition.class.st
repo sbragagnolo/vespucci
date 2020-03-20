@@ -13,6 +13,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+VSAbstractPosition >> id [
+	^ id
+]
+
+{ #category : #'as yet unclassified' }
 VSAbstractPosition >> id: anInteger [ 
 	id := anInteger
 ]

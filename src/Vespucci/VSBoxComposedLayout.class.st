@@ -48,6 +48,11 @@ VSBoxComposedLayout >> createMorphFor: aTree extent: anExtent [
 ]
 
 { #category : #'as yet unclassified' }
+VSBoxComposedLayout >> difference: aVSBoxVerticalLayout [ 
+	^  VSEmptyNode instance 
+]
+
+{ #category : #'as yet unclassified' }
 VSBoxComposedLayout >> extent: aVSNode [ 
 	^ (self layoutFor: aVSNode) calculateExtentFor: aVSNode
 ]
